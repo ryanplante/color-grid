@@ -1,0 +1,21 @@
+<form id="numberForm" method="POST" action="/submit">
+    <label for="numberSelect">Select a number:</label>
+    <select id="numberSelect" name="number">
+        {{#each numbers}}
+            <option value="{{this}}">{{this}}</option>
+        {{/each}}
+    </select>
+    <button type="submit">Submit</button>
+</form>
+
+<!-- Handlebars template for the color grid -->
+<div id="colorGrid">
+    {{{generateColorGrid selectedNumber}}}
+</div>
+
+<script>
+    document.getElementById('numberForm').onsubmit = function(event) {
+        //event.preventDefault();
+        var selectedNumber = document.getElementById('numberSelect').value;
+    };
+</script>
