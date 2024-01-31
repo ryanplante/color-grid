@@ -27,7 +27,17 @@ app.engine('hbs', engine({
             }
             html += '</table>';
             return new Handlebars.SafeString(html);
-        }        
+        },
+        error404: function() {
+            const classes = ['still', 'rotate', 'shrink'];
+            const divCount = Math.floor(Math.random() * (50 - 20 + 1) + 20); // Random number between 20 and 50
+            let html = '';
+            for (let i = 0; i < divCount; i++) {
+                const randomClass = classes[Math.floor(Math.random() * classes.length)];
+                html += `<div class="${randomClass}">404</div>`;
+            }
+            return new Handlebars.SafeString(html);
+        }
     }
 }));
 
@@ -53,6 +63,13 @@ app.post('/submit', (req, res) => {
     res.render('index', {
         numbers: [3, 4, 5, 10, 20],
         selectedNumber: selectedNumber // Pass the selected number to the template for the grid generation
+    });
+});
+
+// Catch 404 and forward to error handler
+app.use(function(req, res, next) {
+    res.status(404).render('error', {
+        title: '404: File Not Found'
     });
 });
 
